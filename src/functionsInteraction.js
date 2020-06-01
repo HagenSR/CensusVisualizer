@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-async function getCounty(count) {
+var getCoutry = function getCounty(count) {
   var url = 'https://us-central1-oval-proxy-276213.cloudfunctions.net/getCounty';
   return new Promise(function (res, fail) {
     axios.post(url, {
@@ -17,7 +17,7 @@ async function getCounty(count) {
 
 }
 
-async function getByID(id) {
+const getByID = async function getByID(id) {
   var url = 'https://us-central1-oval-proxy-276213.cloudfunctions.net/getCountByID';
   return new Promise(function (res, flnk) {
     axios.post(url, {
@@ -32,8 +32,8 @@ async function getByID(id) {
   })
 }
 
-exports.getByID = getByID();
-exports.getCounty = getCounty();
+exports.getByID = getByID;
+exports.getCounty = getCoutry;
 
 
 

@@ -1,19 +1,20 @@
 <template>
-  <div id="app">
-    <county></county>
-  </div>
+ <County></County>
 </template>
 
-<script>
-import County from './components/County.vue'
 
+<script>
+import County from './components/County';
 
 export default {
   name: 'App',
+
   components: {
-    County
-  }
-}
+    County,
+  },
+
+  data: () => ({
+    //
+  }),
+};
 </script>
-<style>
-</style>

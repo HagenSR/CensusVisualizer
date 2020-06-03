@@ -15,6 +15,8 @@
       item-text="county"
       item-value="countryid"
       label="Search for a county"
+      prepend-icon="mdi-database-search"
+      return-object
       solo
     >
       <template v-slot:no-data>
@@ -46,7 +48,7 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title v-text="item.county"></v-list-item-title>
-          <v-list-item-subtitle v-text="item.usstate"></v-list-item-subtitle>
+          <v-list-item-subtitle v-text="item.countryid"></v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
           <v-icon>mdi-coin</v-icon>
@@ -78,6 +80,7 @@ export default {
   watch: {
     search(val) {
       val && val !== this.select && this.querySelections(val);
+      
     }
   },
   methods: {
@@ -93,5 +96,5 @@ export default {
       }, 1000);
     },
   }
-};
+}
 </script>

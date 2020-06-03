@@ -19,17 +19,23 @@ var getCoutry = function getCounty(count) {
 
 const getByID = async function getByID(id) {
   var url = 'https://us-central1-oval-proxy-276213.cloudfunctions.net/getCountByID';
-  return new Promise(function (res, flnk) {
-    axios.post(url, {
-      ID: id,
-    })
-      .then(function (response) {
-        res(response.data);
+  console.log(id)
+  if(!id || id == "" || isNaN(id)){
+    throw "ID was bad"
+  }else{
+    return new Promise(function (res, flnk) {
+      axios.post(url, {
+        ID: id,
       })
-      .catch(function (error) {
-        flnk(error);
-      });
-  })
+        .then(function (response) {
+          res(response.data);
+        })
+        .catch(function (error) {
+          flnk(error);
+        });
+    })
+  }
+ 
 }
 
 exports.getByID = getByID;

@@ -5,7 +5,7 @@
       <h2 v-text="info.county"></h2>
       <h2>Total Population: {{info.totalpop}}</h2>
       <h2>Voting Age Population: {{info.votingagecitizen}}</h2>
-      <h1>People Employed: {{info.employed}}</h1>
+      <h2>People Employed: {{info.employed}}</h2>
       <v-tabs v-model="tab">
         <v-tab>
           <h3>Gender</h3>
@@ -47,11 +47,13 @@
 <script>
 const serve = require("./../functionsInteraction.js");
 import VueApexCharts from "vue-apexcharts";
-
 export default {
   name: "County",
   components: {
     VueApexCharts
+  },
+  props: {
+    id: Number,
   },
   data: () => ({
     tab: null,
@@ -131,7 +133,7 @@ export default {
     }
   },
   mounted: function() {
-    serve.getByID(1001).then(e => this.setup(e));
+    serve.getByID(this.id).then(e => this.setup(e));
   }
 };
 </script>

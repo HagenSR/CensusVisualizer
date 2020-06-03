@@ -1,16 +1,16 @@
 <template>
- <County></County>
+ <Search></Search>
 </template>
 
 
 <script>
-import County from './components/County';
+import Search from './components/Search';
 
 export default {
   name: 'App',
 
   components: {
-    County,
+    Search,
   },
 
   data: () => ({

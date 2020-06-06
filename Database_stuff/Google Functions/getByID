@@ -1,0 +1,64 @@
+/**
+ * Responds to any HTTP request.
+ *
+ * @param {!express:Request} req HTTP request context.
+ * @param {!express:Response} res HTTP response context.
+ */
+
+const Knex = require('knex');
+
+
+// Initialize Knex, a Node.js SQL query builder library with built-in connection pooling.
+const connect = () => {
+  //config for the Google SQL Serve, uses enviroment variables
+  const config = {
+    user: process.env.DB_USER, // e.g. 'my-user'
+    password: process.env.DB_PASS, // e.g. 'my-user-password'
+    database: process.env.DB_NAME, // e.g. 'my-database'
+  };
+
+  //Stored this in plain text, as Enviroment variable appended random text to the end, 
+  config.host = `/cloudsql/oval-proxy-276213:us-central1:demographics`;
+
+  // Establish a connection to the database
+  const knex = Knex({
+    client: 'pg',
+    searchPath: ['knex', 'public'],
+    connection: config,
+  });
+
+  //Returns a knex object
+  return knex;
+};
+
+const knex = connect();
+
+
+//Returns a county based on ID, should be one but limited to one anyway
+const getCountyQuery = async (knex, id) => {
+  try {
+    return await knex('population').where('countryid', id).limit(1)
+  } catch (err) {
+    throw Error(err);
+  }
+};
+
+//Responds to HTTP requests
+exports.getCountyByID = (req, res) => {
+
+  //allows for any website to access, should probably limit to only development
+  res.set('Access-Control-Allow-Origin', '*');
+
+  if (req.method === 'OPTIONS') {
+    // Send response to OPTIONS requests
+    res.set('Access-Control-Allow-Methods', 'GET');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Max-Age', '3600');
+    res.status(204).send('');
+  } else {
+    //Does the query, then responds when it finishes
+    getCountyQuery(knex, req.body.ID).then(resu => res.status(200).send(resu))
+  }
+
+}
+

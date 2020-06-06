@@ -3,6 +3,7 @@ const axios = require('axios');
 
 var getCoutry = function getCounty(count) {
   var url = 'https://us-central1-oval-proxy-276213.cloudfunctions.net/getCounty';
+  count = count.substring(0, 1).toUpperCase() + count.substring(1, count.length).toLowerCase()
   return new Promise(function (res, fail) {
     axios.post(url, {
       county: count,

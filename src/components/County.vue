@@ -1,12 +1,55 @@
 <template>
-  <v-app>
-    <v-container>
-      <h1 v-text="info.usstate">,</h1>
-      <h2 v-text="info.county"></h2>
-      <h2>Total Population: {{info.totalpop}}</h2>
-      <h2>Voting Age Population: {{info.votingagecitizen}}</h2>
-      <h2>People Employed: {{info.employed}}</h2>
-      <v-tabs v-model="tab">
+  <div>
+      <h1>{{info.county}}, {{info.usstate}}</h1>
+      <v-simple-table v-show="loading">
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-left">Name</th>
+              <th class="text-left">Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h2>Total Population:</h2>
+              </td>
+              <td>{{info.totalpop.toLocaleString()}}</td>
+            </tr>
+            <tr>
+              <td>
+                <h2>Voting Age Population:</h2>
+              </td>
+              <td>{{info.votingagecitizen.toLocaleString()}}</td>
+            </tr>
+            <tr>
+              <td>
+                <h2>People Employed:</h2>
+              </td>
+              <td>{{info.employed.toLocaleString()}}</td>
+            </tr>
+            <tr>
+              <td>
+                <h2>GDP per capita:</h2>
+              </td>
+              <td>{{info.incomepercap.toLocaleString()}}</td>
+            </tr>
+            <tr>
+              <td>
+                <h2>Poverty:</h2>
+              </td>
+              <td>{{parseFloat(info.poverty).toFixed(2)+"%"}}</td>
+            </tr>
+            <tr>
+              <td>
+                <h2>Child Poverty</h2>
+              </td>
+              <td>{{parseFloat(info.childpoverty).toFixed(2)+"%"}}</td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+      <v-tabs v-model="tab" grow>
         <v-tab>
           <h3>Gender</h3>
         </v-tab>
@@ -25,23 +68,27 @@
       </v-tabs>
       <v-tabs-items v-model="tab">
         <v-tab-item>
-          <VueApexCharts width = 760 type="donut" :options="genderOptions" :series="genderSeries"></VueApexCharts>
+          <VueApexCharts width="500px" type="donut" :options="genderOptions" :series="genderSeries"></VueApexCharts>
         </v-tab-item>
         <v-tab-item>
-          <VueApexCharts width = 760 type="donut" :options="demoOptions" :series="demoSeries"></VueApexCharts>
+          <VueApexCharts width="500px" type="donut" :options="demoOptions" :series="demoSeries"></VueApexCharts>
         </v-tab-item>
         <v-tab-item>
-          <VueApexCharts width = 760 type="donut" :options="transportOptions" :series="transportSeries"></VueApexCharts>
+          <VueApexCharts
+            width="500px"
+            type="donut"
+            :options="transportOptions"
+            :series="transportSeries"
+          ></VueApexCharts>
         </v-tab-item>
         <v-tab-item>
-          <VueApexCharts width = 760 type="donut" :options="workOptions" :series="workSeries"></VueApexCharts>
+          <VueApexCharts width="500px" type="donut" :options="workOptions" :series="workSeries"></VueApexCharts>
         </v-tab-item>
         <v-tab-item>
-          <VueApexCharts width = 760 type="donut" :options="typeOptions" :series="typeSeries"></VueApexCharts>
+          <VueApexCharts width="500px" type="donut" :options="typeOptions" :series="typeSeries"></VueApexCharts>
         </v-tab-item>
       </v-tabs-items>
-    </v-container>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -53,10 +100,11 @@ export default {
     VueApexCharts
   },
   props: {
-    id: Number,
+    id: Number
   },
   data: () => ({
     tab: null,
+    loading: true,
     info: [],
     genderSeries: [],
     transportSeries: [],
@@ -132,8 +180,10 @@ export default {
       this.demoSeries.push(this.info.pacific);
     }
   },
-  mounted: function() {
+  created: function() {
+    this.loading = false;
     serve.getByID(this.id).then(e => this.setup(e));
+    this.loading = true;
   }
 };
 </script>

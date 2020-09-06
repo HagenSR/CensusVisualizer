@@ -2,12 +2,14 @@ const axios = require('axios');
 
 
 var getCoutry = function getCounty(count) {
-  var url = 'https://us-central1-oval-proxy-276213.cloudfunctions.net/getCounty';
+  var url = 'http://127.0.0.1:5000/getCounties';
   count = count.substring(0, 1).toUpperCase() + count.substring(1, count.length).toLowerCase()
   return new Promise(function (res, fail) {
-    axios.post(url, {
-      county: count,
-    })
+    axios.post(
+      url,
+      {
+        county: count,
+      })
       .then(function (response) {
         res(response.data);
       })
@@ -19,11 +21,11 @@ var getCoutry = function getCounty(count) {
 }
 
 const getByID = async function getByID(id) {
-  var url = 'https://us-central1-oval-proxy-276213.cloudfunctions.net/getCountByID';
+  var url = 'http://127.0.0.1:5000/getCounty';
   console.log(id)
-  if(!id || id == "" || isNaN(id)){
+  if (!id || id == "" || isNaN(id)) {
     throw "ID was bad"
-  }else{
+  } else {
     return new Promise(function (res, flnk) {
       axios.post(url, {
         ID: id,
@@ -36,7 +38,7 @@ const getByID = async function getByID(id) {
         });
     })
   }
- 
+
 }
 
 exports.getByID = getByID;

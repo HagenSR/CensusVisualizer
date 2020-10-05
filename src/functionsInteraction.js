@@ -1,15 +1,13 @@
 const axios = require('axios');
-
+const qs = require('qs');
 
 var getCoutry = function getCounty(count) {
-  var url = 'http://127.0.0.1:5000/getCounties';
+  var url = 'http://students.cs.ndsu.nodak.edu/~seahagen/Census/PHPtest/getStatesByName.php';
   count = count.substring(0, 1).toUpperCase() + count.substring(1, count.length).toLowerCase()
   return new Promise(function (res, fail) {
     axios.post(
       url,
-      {
-        county: count,
-      })
+      qs.stringify({county: count + "%"}))
       .then(function (response) {
         res(response.data);
       })
@@ -21,15 +19,15 @@ var getCoutry = function getCounty(count) {
 }
 
 const getByID = async function getByID(id) {
-  var url = 'http://127.0.0.1:5000/getCounty';
+  var url = 'http://students.cs.ndsu.nodak.edu/~seahagen/Census/PHPtest/getState.php';
   console.log(id)
   if (!id || id == "" || isNaN(id)) {
     throw "ID was bad"
   } else {
     return new Promise(function (res, flnk) {
-      axios.post(url, {
-        ID: id,
-      })
+      axios.post(url, 
+        qs.stringify({ID: id})
+        )
         .then(function (response) {
           res(response.data);
         })

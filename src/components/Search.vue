@@ -11,8 +11,8 @@
         clearable
         hide-details
         hide-selected
-        item-text="County"
-        item-value="CountyId"
+        item-text="county"
+        item-value="countyid"
         label="Search for a county"
         prepend-icon="mdi-database-search"
         return-object
@@ -35,17 +35,17 @@
             v-on="on"
           >
             <v-icon left>mdi-coin</v-icon>
-            <span v-text="item.County"></span>
+            <span v-text="item.county"></span>
           </v-chip>
         </template>
         <template v-slot:item="{ item }">
           <v-list-item-avatar
             color="indigo"
             class="headline font-weight-light white--text"
-          >{{ item.County.substr(0,2)}}</v-list-item-avatar>
+          >{{ item.county.substr(0,2)}}</v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title v-text="item.County"></v-list-item-title>
-            <v-list-item-subtitle v-text="item.State"></v-list-item-subtitle>
+            <v-list-item-title v-text="item.county"></v-list-item-title>
+            <v-list-item-subtitle v-text="item.state"></v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
             <v-icon>mdi-coin</v-icon>
@@ -53,7 +53,9 @@
         </template>
       </v-autocomplete>
     </v-toolbar>
-    <county v-if="model" :id="model.CountyId"></county>
+    <div style="margin:10px ">
+    <county v-if="model" :id="model.countyid.toString()"></county>
+    </div>
   </div>
 </template>
 <script>

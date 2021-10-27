@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>{{info.County}}, {{info.State}}</h1>
+      <h1>{{info.county}}, {{info.state}}</h1>
       <v-simple-table v-show="loading">
         <template v-slot:default>
           <thead>
@@ -14,37 +14,37 @@
               <td>
                 <h2>Total Population:</h2>
               </td>
-              <td>{{info.TotalPop.toLocaleString()}}</td>
+              <td>{{info.totalpop.toLocaleString()}}</td>
             </tr>
             <tr>
               <td>
                 <h2>Voting Age Population:</h2>
               </td>
-              <td>{{info.VotingAgeCitizen.toLocaleString()}}</td>
+              <td>{{info.votingagecitizen.toLocaleString()}}</td>
             </tr>
             <tr>
               <td>
                 <h2>People Employed:</h2>
               </td>
-              <td>{{info.Employed.toLocaleString()}}</td>
+              <td>{{info.employed.toLocaleString()}}</td>
             </tr>
             <tr>
               <td>
                 <h2>GDP per capita:</h2>
               </td>
-              <td>{{info.IncomePerCap.toLocaleString()}}</td>
+              <td>{{info.incomePerCap.toLocaleString()}}</td>
             </tr>
             <tr>
               <td>
                 <h2>Poverty:</h2>
               </td>
-              <td>{{parseFloat(info.Poverty).toFixed(2)+"%"}}</td>
+              <td>{{parseFloat(info.poverty).toFixed(2)+"%"}}</td>
             </tr>
             <tr>
               <td>
                 <h2>Child Poverty</h2>
               </td>
-              <td>{{parseFloat(info.ChildPoverty).toFixed(2)+"%"}}</td>
+              <td>{{parseFloat(info.childpoverty).toFixed(2)+"%"}}</td>
             </tr>
           </tbody>
         </template>
@@ -156,29 +156,29 @@ export default {
     setup(e) {
       console.log(e)
       this.info = e[0];
-      this.genderSeries.push(parseInt(this.info.Men));
-      this.genderSeries.push(parseInt(this.info.Women));
-      this.transportSeries.push(parseInt(this.info.Drive));
-      this.transportSeries.push(parseInt(this.info.Carpool));
-      this.transportSeries.push(parseInt(this.info.Transit));
-      this.transportSeries.push(parseInt(this.info.Walk));
-      this.transportSeries.push(parseInt(this.info.OtherTransp));
-      this.workSeries.push(parseInt(this.info.PrivateWork));
-      this.workSeries.push(parseInt(this.info.PublicWork));
-      this.workSeries.push(parseInt(this.info.SelfEmployed));
-      this.workSeries.push(parseInt(this.info.FamilyWork));
-      this.workSeries.push(parseInt(this.info.Unemployment));
-      this.typeSeries.push(parseInt(this.info.Professional));
-      this.typeSeries.push(parseInt(this.info.Service));
-      this.typeSeries.push(parseInt(this.info.Office));
-      this.typeSeries.push(parseInt(this.info.Construction));
-      this.typeSeries.push(parseInt(this.info.Production));
-      this.demoSeries.push(parseInt(this.info.White));
-      this.demoSeries.push(parseInt(this.info.Hispanic));
-      this.demoSeries.push(parseInt(this.info.Black));
-      this.demoSeries.push(parseInt(this.info.Native));
-      this.demoSeries.push(parseInt(this.info.Asian));
-      this.demoSeries.push(parseInt(this.info.Pacific));
+      this.genderSeries.push(parseInt(this.info.men));
+      this.genderSeries.push(parseInt(this.info.women));
+      this.transportSeries.push(parseInt(this.info.drive));
+      this.transportSeries.push(parseInt(this.info.carpool));
+      this.transportSeries.push(parseInt(this.info.transit));
+      this.transportSeries.push(parseInt(this.info.walk));
+      this.transportSeries.push(parseInt(this.info.othertransp));
+      this.workSeries.push(parseInt(this.info.privatework));
+      this.workSeries.push(parseInt(this.info.publicwork));
+      this.workSeries.push(parseInt(this.info.selfemployed));
+      this.workSeries.push(parseInt(this.info.familywork));
+      this.workSeries.push(parseInt(this.info.unemployment));
+      this.typeSeries.push(parseInt(this.info.professional));
+      this.typeSeries.push(parseInt(this.info.service));
+      this.typeSeries.push(parseInt(this.info.office));
+      this.typeSeries.push(parseInt(this.info.construction));
+      this.typeSeries.push(parseInt(this.info.production));
+      this.demoSeries.push(parseInt(this.info.white));
+      this.demoSeries.push(parseInt(this.info.hispanic));
+      this.demoSeries.push(parseInt(this.info.black));
+      this.demoSeries.push(parseInt(this.info.native));
+      this.demoSeries.push(parseInt(this.info.asian));
+      this.demoSeries.push(parseInt(this.info.pacific));
     }
   },
   created: function() {

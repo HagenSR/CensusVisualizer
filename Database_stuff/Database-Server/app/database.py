@@ -3,16 +3,21 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from flask import Flask, g, request, jsonify
 from flask_cors import CORS
+import os
 
 
 app = Flask(__name__)
 CORS(app)
 
-conn = psycopg2.connect(
-     host="localhost",
-     database="People",
-     user="postgres",
-     password="password")
+conn = ""
+if os.environ['DATABASE_URL']:
+    conn = psycopg2.connect(os.environ['DATABASE_URL'])
+else:    
+    conn = psycopg2.connect(
+        host="localhost",
+        database="People",
+        user="postgres",
+        password="password")
 
 @app.route('/getCounties', methods=['POST'])
 def getCounties():

@@ -2,7 +2,7 @@ const axios = require('axios');
 const qs = require('qs');
 
 var getCoutry = function getCounty(count) {
-  var url = 'http://students.cs.ndsu.nodak.edu/~seahagen/Census/PHPtest/getStatesByName.php';
+  var url = 'https://census-api-sean.herokuapp.com/getStatesByName.php';
   count = count.substring(0, 1).toUpperCase() + count.substring(1, count.length).toLowerCase()
   return new Promise(function (res, fail) {
     axios.post(
@@ -19,7 +19,7 @@ var getCoutry = function getCounty(count) {
 }
 
 const getByID = async function getByID(id) {
-  var url = 'http://students.cs.ndsu.nodak.edu/~seahagen/Census/PHPtest/getState.php';
+  var url = 'https://census-api-sean.herokuapp.com/getState.php';
   console.log(id)
   if (!id || id == "" || isNaN(id)) {
     throw "ID was bad"

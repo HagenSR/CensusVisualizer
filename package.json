@@ -14,7 +14,7 @@
     "pg": "^8.2.1",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.5.3",
-    "vuetify": "^2.2.11",
+    "vuetify": "^2.6.10",
     "winston": "^3.2.1"
   },
   "devDependencies": {
